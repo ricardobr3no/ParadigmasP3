@@ -1,7 +1,11 @@
 public abstract class Produto {
-    private String Codigo;
+    private String codigo;
     private String nome;
     private double valor;
+
+
+    public Produto() {
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
