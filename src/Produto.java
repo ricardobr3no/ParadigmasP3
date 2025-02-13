@@ -12,7 +12,7 @@ public abstract class Produto {
     }
 
     public void setCodigo(String codigo) {
-        Codigo = codigo;
+        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -24,7 +24,7 @@ public abstract class Produto {
     }
 
     public String getCodigo() {
-        return Codigo;
+        return codigo;
     }
 
     public void aplicaDesconto(double porcentagemDesconto) {
