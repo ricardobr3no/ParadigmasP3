@@ -1,4 +1,4 @@
-public abstract class Produto {
+public class Produto {
     private String codigo;
     private String nome;
     private double valor;

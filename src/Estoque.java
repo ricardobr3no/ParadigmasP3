@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 class Estoque {
     private Map<String, Produto> produtos;
@@ -45,5 +46,28 @@ class Estoque {
                 System.out.println("Codigo: " + produto.getCodigo() + "\t Nome: " + produto.getNome() + "\t Valor: " + produto.getValor());
             }
         }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("nome do produto: ");
+        String nomeProduto = input.nextLine();
+
+        System.out.print("codigo do produto: ");
+        String codigoProduto = input.nextLine();
+
+        System.out.print("valor do produto: ");
+        double valorProduto = input.nextDouble();
+
+        Produto produto1 = new Produto();
+        produto1.setNome(nomeProduto);
+        produto1.setCodigo(codigoProduto);
+        produto1.setValor(valorProduto);
+
+        Estoque estoque = new Estoque();
+        estoque.cadastrarProduto(produto1);
+        estoque.listarProdutos();
     }
 }
