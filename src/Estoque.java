@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 class Estoque {
-    private Map<String, Produto> produtos;
+    private Map<String, Produto> produtos = new HashMap<String, Produto>();
 
     public Estoque() {
         this.produtos = new HashMap<>();
@@ -50,6 +50,7 @@ class Estoque {
 
     public static void main(String[] args) {
 
+        /*
         Scanner input = new Scanner(System.in);
 
         System.out.print("nome do produto: ");
@@ -69,5 +70,6 @@ class Estoque {
         Estoque estoque = new Estoque();
         estoque.cadastrarProduto(produto1);
         estoque.listarProdutos();
+         */
     }
 }
