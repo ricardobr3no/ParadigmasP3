@@ -28,6 +28,13 @@ public class App extends JDialog {
     private JPanel content3;
     private JPanel content1;
     private JTable table1;
+    private JTextField inputNome;
+    private JTextField inputPreco;
+    private JSpinner inputQuantidade;
+    private JPanel FormCadastro;
+    private JLabel lblNome;
+    private JLabel lblPreco;
+    private JLabel lblQuantidade;
 
     public App() {
         setContentPane(Root);
@@ -79,7 +86,4 @@ public class App extends JDialog {
         System.exit(0);
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }
