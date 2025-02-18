@@ -19,29 +19,41 @@ public class App extends JFrame {
     private static int contador = 1;
 
     public App() {
-        super("Farmácia/Mercadinho"); // Define o título da janela
+        super("Gerenciador de Estoque"); // Define o título da janela
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Tabela de Produtos
+// Tabela de Produtos
         String[] colunasProdutos = {"ID", "Nome", "Preço", "Quantidade"};
         modeloProdutos = new DefaultTableModel(colunasProdutos, 0);
         tabelaProdutos = new JTable(modeloProdutos);
         JScrollPane scrollProdutos = new JScrollPane(tabelaProdutos);
 
-        // Tabela de Pedidos
-        String[] colunasPedidos = {"ID Pedido", "Itens", "Quantidades", "Total (R$)"};
+// Título da tabela de produtos
+        JLabel tituloProdutos = new JLabel("Tabela de Produtos", JLabel.CENTER);
+        tituloProdutos.setFont(new Font("Arial", Font.BOLD, 14));
+        add(tituloProdutos, BorderLayout.NORTH); // Adiciona o título de produtos no topo
+
+// Tabela de Pedidos
+        String[] colunasPedidos = {"ID Pedido", "Itens", "Quantidades", "Total (R$)", "Data"};
         modeloPedidos = new DefaultTableModel(colunasPedidos, 0);
         tabelaPedidos = new JTable(modeloPedidos);
         JScrollPane scrollPedidos = new JScrollPane(tabelaPedidos);
 
-        // Painel para as tabelas
-        JPanel painelTabelas = new JPanel(new GridLayout(2, 1));
-        painelTabelas.add(scrollProdutos);
-        painelTabelas.add(scrollPedidos);
+// Painel para a tabela de pedidos e título
+        JPanel painelPedidos = new JPanel(new BorderLayout());
+        JLabel tituloPedidos = new JLabel("Tabela de Pedidos", JLabel.CENTER);
+        tituloPedidos.setFont(new Font("Arial", Font.BOLD, 16));
+        painelPedidos.add(tituloPedidos, BorderLayout.NORTH); // Adiciona o título no topo do painel
+        painelPedidos.add(scrollPedidos, BorderLayout.CENTER); // Adiciona a tabela abaixo do título
 
-        // Botões
+// Painel para as tabelas
+        JPanel painelTabelas = new JPanel(new GridLayout(2, 1));
+        painelTabelas.add(scrollProdutos); // Adiciona a tabela de produtos
+        painelTabelas.add(painelPedidos); // Adiciona o painel de pedidos com título e tabela
+
+// Botões
         JButton btnAdicionar = new JButton("Adicionar Produto");
         JButton btnEditar = new JButton("Editar Produto");
         JButton btnRemover = new JButton("Remover Produto");
@@ -53,6 +65,7 @@ public class App extends JFrame {
         painelBotoes.add(btnRemover);
         painelBotoes.add(btnPedido);
 
+// Adiciona o painel de tabelas e os botões à janela
         add(painelTabelas, BorderLayout.CENTER);
         add(painelBotoes, BorderLayout.SOUTH);
 
@@ -74,9 +87,16 @@ public class App extends JFrame {
                 return;
             }
         }
-        double preco = Double.parseDouble(JOptionPane.showInputDialog("Preço do produto:"));
-        int quantidade = Integer.parseInt(JOptionPane.showInputDialog("Quantidade:"));
-
+        double preco;
+        int quantidade;
+        try {
+            preco = Double.parseDouble(JOptionPane.showInputDialog("Preço do produto:"));
+            quantidade = Integer.parseInt(JOptionPane.showInputDialog("Quantidade:"));
+        }
+        catch (NumberFormatException erro){
+            JOptionPane.showMessageDialog(this, "Valor invalido");
+            return;
+        }
         Produto p = new Produto(contador++, nome, preco, quantidade);
         listaProdutos.add(p);
         modeloProdutos.addRow(new Object[]{p.getId(), p.getNome(), p.getPreco(), p.getQuantidade()});
@@ -91,9 +111,16 @@ public class App extends JFrame {
 
         Produto p = listaProdutos.get(linhaSelecionada);
         String novoNome = JOptionPane.showInputDialog("Novo nome:", p.getNome());
-        double novoPreco = Double.parseDouble(JOptionPane.showInputDialog("Novo preço:", p.getPreco()));
-        int novaQuantidade = Integer.parseInt(JOptionPane.showInputDialog("Nova quantidade:", p.getQuantidade()));
-
+        double novoPreco;
+        int novaQuantidade;
+        try {
+            novoPreco = Double.parseDouble(JOptionPane.showInputDialog("Novo preço:", p.getPreco()));
+            novaQuantidade = Integer.parseInt(JOptionPane.showInputDialog("Nova quantidade:", p.getQuantidade()));
+        }
+        catch (NumberFormatException erro){
+            JOptionPane.showMessageDialog(this, "Valor invalido");
+            return;
+        }
         p.setNome(novoNome);
         p.setPreco(novoPreco);
         p.setQuantidade(novaQuantidade);
@@ -161,7 +188,7 @@ public class App extends JFrame {
                 .map(item -> String.valueOf(item.getQuantidade()))
                 .collect(Collectors.joining(", "));
 
-        modeloPedidos.addRow(new Object[]{pedido.getId(), descricaoItens, quantidades, pedido.getTotal()});
+        modeloPedidos.addRow(new Object[]{pedido.getId(), descricaoItens, quantidades, pedido.getTotal(), pedido.getDataHora()});
         JOptionPane.showMessageDialog(this, "Pedido #" + pedido.getId() + " registrado! Total: R$ " + pedido.getTotal());
     }
 
