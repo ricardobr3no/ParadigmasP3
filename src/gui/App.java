@@ -10,23 +10,15 @@ public class App extends JDialog {
     private JTabbedPane abas;
     private JPanel estoque;
     private JPanel btnContainer1;
-    private JButton adicionarButton;
     private JButton removerButton;
     private JButton editarButton;
     private JPanel pedido;
-    private JPanel historico;
     private JPanel btnContainer2;
-    private JButton adicionarButton1;
-    private JButton removerButton1;
-    private JButton editarButton1;
-    private JPanel btnContainer3;
-    private JButton adicionarButton2;
-    private JButton removerButton2;
-    private JButton editarButton3;
+    private JButton btnAdiciona;
+    private JButton btnRemove;
+    private JButton btnEdit;
     private JPanel content2;
-    private JPanel content3;
-    private JPanel content1;
-    private JTable table1;
+    private JTable tabelaEstoque;
     private JTextField inputNome;
     private JTextField inputPreco;
     private JSpinner inputQuantidade;
@@ -46,56 +38,81 @@ public class App extends JDialog {
     private JLabel lblQtd;
     private JLabel lblValor;
     private JTable tabelaPedido;
+    private JLabel lblTotal;
+    private JButton adicionarButton1;
+    private JButton btnAdd;
+    private JTextField inputQtd;
 
     public App() {
         setContentPane(Root);
         setModal(true);
 
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
+        btnAdd.addActionListener(e -> {
+            if (inputNome.getText().isEmpty() || inputPreco.getText().isEmpty() || inputQtd.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "preencha todos os campos!");
+            }
+            else {
+                // inputs to array
+                String[] data = {inputNome.getText(), inputPreco.getText(), inputQtd.getText()};
+                DefaultTableModel tableModel = (DefaultTableModel) tabelaEstoque.getModel();
+                tableModel.addRow(data); // add
+                // clear
+                inputNome.setText("");
+                inputPreco.setText("");
+                inputQtd.setText("");
+                System.out.println(123);
             }
         });
-
-        // call onCancel() on ESCAPE
-        Root.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
+    private void btnDeleteAction(ActionEvent e) {
+        DefaultTableModel tableModel = (DefaultTableModel) tabelaEstoque.getModel();
+
+        int linhaSelecionada = tabelaEstoque.getSelectedRow();
+        // Verificando se há uma linha selecionada
+        if (linhaSelecionada != -1) {
+            // Removendo a linha selecionada
+            tableModel.removeRow(linhaSelecionada);
+        } else {
+            JOptionPane.showMessageDialog(getParent(), "Selecione uma linha para remover.");
+        }
+
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
+    private void btnAddAction(ActionEvent e) {
+        if (inputNome.getText().isEmpty() || inputPreco.getText().isEmpty() || inputQtd.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "preencha todos os campos!");
+        }
+        else {
+            // inputs to array
+            String[] data = {inputNome.getText(), inputPreco.getText(), inputQtd.getText()};
+            DefaultTableModel tableModel = (DefaultTableModel) tabelaEstoque.getModel();
+            tableModel.addRow(data); // add
+            // clear
+        }
+
     }
 
-    private void loadTable() {
-        String[][] data = {
-                {"joao", "23", "slz"},
-                {"joao", "23", "slz"},
-                {"joao", "23", "slz"},
-        };
-        String[] row = {"joao", "23", "slz"};
-        String[] collumNames = {"nome", "age", "uf"};
 
-        DefaultTableModel modelo = new DefaultTableModel(data, collumNames);
-        tabelaPedido.setModel(modelo);
-    }
 
     public static void main(String[] args) {
+
+        String[][] data = {
+                {"ana", "jessica", "caroline"},
+                {"ana", "jessica", "caroline"},
+                {"ana", "jessica", "caroline"}
+        };
+
+        String[] columnNames = {"nome", "age", "price"};
+
         App dialog = new App();
-        dialog.loadTable();
+
+        DefaultTableModel modelo = new DefaultTableModel(columnNames, 0);
+        dialog.tabelaPedido.setModel(modelo);
         dialog.pack();
+
+
         dialog.setVisible(true);
         System.exit(0);
     }
-
 }

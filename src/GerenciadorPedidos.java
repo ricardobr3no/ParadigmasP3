@@ -3,7 +3,7 @@ import java.util.List;
 
 public class GerenciadorPedidos {
     private static GerenciadorPedidos instancia; // Instância única
-    private List<Pedido> listaPedidos;
+    private List <Pedido> listaPedidos;
     private Estoque estoque; // Referência ao estoque
     private int contador = 1;
 
