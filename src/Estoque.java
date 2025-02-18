@@ -1,35 +1,52 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-class Estoque {
-    private Map<String, Produto> produtos = new HashMap<String, Produto>();
+public class Estoque {
+    private static Estoque instancia; // Instância única (Singleton)
+    private Map<Integer, Produto> produtos;
+    private int contador = 1;
 
-    public Estoque() {
+    Estoque() {
         this.produtos = new HashMap<>();
     }
 
-    public void cadastrarProduto(Produto produto) {
-        if (!produtos.containsKey(produto.getCodigo())) {
-            produtos.put(produto.getCodigo(), produto);
-            System.out.println("Produto cadastrado com sucesso!");
-        } else {
-            System.out.println("Erro: Já existe um produto com esse código.");
+    // Aplicação do Singleton
+    public static Estoque getInstance() {
+        if (instancia == null) {
+            instancia = new Estoque();
         }
+        return instancia;
     }
 
-    public void alterarProduto(String codigo, String novoNome, double novoValor) {
+    public void cadastrarProduto(String nome, int quantidade, double valor, String lab) {
+        for(Produto p : produtos.values()){
+            if(p.getItem().equalsIgnoreCase(nome)){
+                System.out.println("Erro: Poduto já cadastrado");
+                return;
+            }
+        }
+        Produto novoProduto = new Medicamento(contador, nome, quantidade, valor, lab);
+        produtos.put(contador, novoProduto);
+        contador++;
+    }
+
+    public void alterarProduto(int codigo, String novoNome, double novoValor, int novaQuantidade) {
         if (produtos.containsKey(codigo)) {
             Produto produto = produtos.get(codigo);
-            produto.setNome(novoNome);
+            produto.setItem(novoNome);
             produto.setValor(novoValor);
+            produto.setQuantidade(novaQuantidade);
             System.out.println("Produto atualizado com sucesso!");
         } else {
             System.out.println("Erro: Produto não encontrado.");
         }
     }
 
-    public void removerProduto(String codigo) {
+    public Produto buscarProduto(int codigo) {
+        return produtos.get(codigo);
+    }
+
+    public void removerProduto(int codigo) {
         if (produtos.remove(codigo) != null) {
             System.out.println("Produto removido com sucesso!");
         } else {
@@ -43,12 +60,12 @@ class Estoque {
         } else {
             System.out.println("Lista de produtos no estoque:");
             for (Produto produto : produtos.values()) {
-                System.out.println("Codigo: " + produto.getCodigo() + "\t Nome: " + produto.getNome() + "\t Valor: " + produto.getValor());
+                System.out.println("Codigo: " + produto.getCodigo() + "\t Nome: " + produto.getItem() + "\t Valor: " + produto.getValor() + "\t Quantidade: " + produto.getQuantidade());
             }
         }
     }
 
-    public static void main(String[] args) {
+public static void main(String[] args) {
 
         /*
         Scanner input = new Scanner(System.in);
@@ -63,7 +80,7 @@ class Estoque {
         double valorProduto = input.nextDouble();
 
         Produto produto1 = new Produto();
-        produto1.setNome(nomeProduto);
+        produto1.setItem(nomeProduto);
         produto1.setCodigo(codigoProduto);
         produto1.setValor(valorProduto);
 
