@@ -3,7 +3,7 @@
   <grid id="cbd77" binding="Root" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="48" y="54" width="623" height="500"/>
+      <xy x="48" y="54" width="658" height="500"/>
     </constraints>
     <properties>
       <minimumSize width="400" height="300"/>
@@ -30,7 +30,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="8cb71" binding="btnContainer1" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="8cb71" binding="btnContainer1" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="2" hsize-policy="7" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
@@ -38,17 +38,9 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="970d9" class="javax.swing.JButton" binding="adicionarButton" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Adicionar"/>
-                    </properties>
-                  </component>
                   <component id="3f8e9" class="javax.swing.JButton" binding="removerButton" default-binding="true">
                     <constraints>
-                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Remover"/>
@@ -56,7 +48,7 @@
                   </component>
                   <component id="71610" class="javax.swing.JButton" binding="editarButton" default-binding="true">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Editar"/>
@@ -64,25 +56,7 @@
                   </component>
                 </children>
               </grid>
-              <grid id="79e34" binding="content1" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none" title="tabela"/>
-                <children>
-                  <component id="21cd" class="javax.swing.JTable" binding="table1" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="50"/>
-                      </grid>
-                    </constraints>
-                    <properties/>
-                  </component>
-                </children>
-              </grid>
-              <grid id="7357e" binding="FormCadastro" layout-manager="GridLayoutManager" row-count="1" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="7357e" binding="FormCadastro" layout-manager="GridLayoutManager" row-count="1" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="true"/>
@@ -136,16 +110,35 @@
                       <text value="Qtd."/>
                     </properties>
                   </component>
-                  <component id="a8536" class="javax.swing.JSpinner" binding="inputQuantidade">
+                  <component id="6e362" class="javax.swing.JButton" binding="btnAdd">
+                    <constraints>
+                      <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Adicionar"/>
+                    </properties>
+                  </component>
+                  <component id="3cb88" class="javax.swing.JTextField" binding="inputQtd">
                     <constraints>
                       <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="93" height="10"/>
+                        <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
                     <properties/>
                   </component>
                 </children>
               </grid>
+              <component id="21cd" class="javax.swing.JTable" binding="tabelaEstoque">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="50"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <autoCreateRowSorter value="true"/>
+                  <fillsViewportHeight value="true"/>
+                </properties>
+              </component>
             </children>
           </grid>
           <grid id="68fe2" binding="pedido" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -164,7 +157,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="3af41" class="javax.swing.JButton" binding="removerButton1" default-binding="true">
+                  <component id="3af41" class="javax.swing.JButton" binding="btnRemove">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -172,7 +165,7 @@
                       <text value="Remover"/>
                     </properties>
                   </component>
-                  <component id="5563c" class="javax.swing.JButton" binding="editarButton1" default-binding="true">
+                  <component id="5563c" class="javax.swing.JButton" binding="btnEdit">
                     <constraints>
                       <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -180,7 +173,7 @@
                       <text value="Editar"/>
                     </properties>
                   </component>
-                  <component id="f5ca7" class="javax.swing.JButton" binding="adicionarButton1" default-binding="true">
+                  <component id="f5ca7" class="javax.swing.JButton" binding="btnAdiciona">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -190,67 +183,131 @@
                   </component>
                 </children>
               </grid>
-              <grid id="c1b57" binding="content2" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="c1b57" binding="content2" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none" title="content"/>
-                <children/>
-              </grid>
-            </children>
-          </grid>
-          <grid id="bbda" binding="historico" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
-            <constraints>
-              <tabbedpane title="Historico"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <grid id="54385" binding="btnContainer3" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
                 <children>
-                  <component id="28362" class="javax.swing.JButton" binding="adicionarButton2" default-binding="true">
+                  <grid id="4edfb" binding="inputs" layout-manager="GridLayoutManager" row-count="1" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="74783" class="javax.swing.JLabel" binding="Produto">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Produto: "/>
+                        </properties>
+                      </component>
+                      <component id="c6231" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <model/>
+                        </properties>
+                      </component>
+                      <component id="e1169" class="javax.swing.JLabel" binding="labelQuantidade1">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Qtd: "/>
+                        </properties>
+                      </component>
+                      <component id="67fb" class="javax.swing.JSpinner" binding="spinner1" default-binding="true">
+                        <constraints>
+                          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <component id="361f9" class="javax.swing.JLabel" binding="lblDesconto">
+                        <constraints>
+                          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Desconto: "/>
+                        </properties>
+                      </component>
+                      <component id="17ee6" class="javax.swing.JSpinner" binding="spinner2" default-binding="true">
+                        <constraints>
+                          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <component id="fa1a9" class="javax.swing.JButton" binding="adicionarButton1" default-binding="true">
+                        <constraints>
+                          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Adicionar"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="13bdd" binding="registros2" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none" title="registros"/>
+                    <children>
+                      <component id="cfeb" class="javax.swing.JLabel" binding="lblProduto">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Produto"/>
+                        </properties>
+                      </component>
+                      <component id="e6e69" class="javax.swing.JLabel" binding="lblQtd">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Qtd."/>
+                        </properties>
+                      </component>
+                      <component id="beed6" class="javax.swing.JLabel" binding="lblValor">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Valor Unitario (R$)"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <component id="17bc7" class="javax.swing.JTable" binding="tabelaPedido">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="50"/>
+                      </grid>
                     </constraints>
                     <properties>
-                      <text value="Adicionar"/>
+                      <autoCreateRowSorter value="true"/>
+                      <updateSelectionOnSort value="true"/>
                     </properties>
                   </component>
-                  <component id="55c94" class="javax.swing.JButton" binding="removerButton2" default-binding="true">
+                  <component id="107f3" class="javax.swing.JLabel" binding="lblTotal">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Remover"/>
-                    </properties>
-                  </component>
-                  <component id="ba5df" class="javax.swing.JButton" binding="editarButton3" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Editar"/>
+                      <foreground color="-1757387"/>
+                      <text value="Total: R$ 100,00   "/>
                     </properties>
                   </component>
                 </children>
-              </grid>
-              <grid id="e98a" binding="content3" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none" title="content"/>
-                <children/>
               </grid>
             </children>
           </grid>
