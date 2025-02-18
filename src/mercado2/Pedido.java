@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Pedido {
     private int id;
-    private List<Produto> itens;
+    private List<ItemPedido> itens;
     private double total;
 
-    public Pedido(int id, List<Produto> itens) {
+    public Pedido(int id, List<ItemPedido> itens) {
         this.id = id;
         this.itens = itens;
         this.total = calcularTotal();
@@ -21,7 +21,7 @@ public class Pedido {
         return id;
     }
 
-    public List<Produto> getItens() {
+    public List<ItemPedido> getItens() {
         return itens;
     }
 
@@ -29,4 +29,3 @@ public class Pedido {
         return total;
     }
 }
-

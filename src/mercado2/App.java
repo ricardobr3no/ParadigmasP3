@@ -1,11 +1,14 @@
 package mercado2;
 
+import mercado2.ItemPedido;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class App extends JFrame {
     private List<Produto> listaProdutos = new ArrayList<>();
@@ -13,6 +16,7 @@ public class App extends JFrame {
 
     private JTable tabelaProdutos, tabelaPedidos;
     private DefaultTableModel modeloProdutos, modeloPedidos;
+    private static int contador = 1;
 
     public App() {
         super("Farmácia/Mercadinho"); // Define o título da janela
@@ -27,7 +31,7 @@ public class App extends JFrame {
         JScrollPane scrollProdutos = new JScrollPane(tabelaProdutos);
 
         // Tabela de Pedidos
-        String[] colunasPedidos = {"ID Pedido", "Itens", "Total (R$)"};
+        String[] colunasPedidos = {"ID Pedido", "Itens", "Quantidades", "Total (R$)"};
         modeloPedidos = new DefaultTableModel(colunasPedidos, 0);
         tabelaPedidos = new JTable(modeloPedidos);
         JScrollPane scrollPedidos = new JScrollPane(tabelaPedidos);
@@ -64,10 +68,16 @@ public class App extends JFrame {
 
     private void adicionarProduto(ActionEvent e) {
         String nome = JOptionPane.showInputDialog("Nome do produto:");
+        for (Produto p : listaProdutos) {
+            if (p.getNome().equalsIgnoreCase(nome)) {
+                JOptionPane.showMessageDialog(this, "Produto já cadastrado");
+                return;
+            }
+        }
         double preco = Double.parseDouble(JOptionPane.showInputDialog("Preço do produto:"));
         int quantidade = Integer.parseInt(JOptionPane.showInputDialog("Quantidade:"));
 
-        Produto p = new Produto(listaProdutos.size() + 1, nome, preco, quantidade);
+        Produto p = new Produto(contador++, nome, preco, quantidade);
         listaProdutos.add(p);
         modeloProdutos.addRow(new Object[]{p.getId(), p.getNome(), p.getPreco(), p.getQuantidade()});
     }
@@ -103,21 +113,32 @@ public class App extends JFrame {
         listaProdutos.remove(linhaSelecionada);
         modeloProdutos.removeRow(linhaSelecionada);
     }
-
     private void adicionarPedido(ActionEvent e) {
         if (listaProdutos.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Não há produtos disponíveis para criar um pedido.");
             return;
         }
 
-        List<Produto> itensPedido = new ArrayList<>();
+        List<ItemPedido> itensPedido = new ArrayList<>();
         String input = JOptionPane.showInputDialog("Digite os IDs dos produtos separados por vírgula:");
         String[] ids = input.split(",");
 
         for (String id : ids) {
             int index = Integer.parseInt(id.trim()) - 1;
             if (index >= 0 && index < listaProdutos.size()) {
-                itensPedido.add(listaProdutos.get(index));
+                Produto produto = listaProdutos.get(index);
+                String quantidadeStr = JOptionPane.showInputDialog("Digite a quantidade do produto \"" + produto.getNome() + "\":");
+                try {
+                    int quantidade = Integer.parseInt(quantidadeStr.trim());
+                    if (quantidade > 0 && quantidade <= produto.getQuantidade()) { // Verifica se há estoque suficiente
+                        itensPedido.add(new ItemPedido(produto, quantidade)); // Adiciona o item com a quantidade no pedido
+                        atualizarEstoque(produto, quantidade); // Atualiza o estoque após a venda
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Quantidade inválida para o produto \"" + produto.getNome() + "\".");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Quantidade inválida para o produto \"" + produto.getNome() + "\".");
+                }
             }
         }
 
@@ -126,15 +147,59 @@ public class App extends JFrame {
             return;
         }
 
+        // Cria o pedido com a lista de itens (Produto + Quantidade)
         Pedido pedido = new Pedido(listaPedidos.size() + 1, itensPedido);
         listaPedidos.add(pedido);
 
-        String descricaoItens = String.join(", ",
-                itensPedido.stream().map(Produto::getNome).toArray(String[]::new));
+        // Exibe a descrição dos itens do pedido
+        String descricaoItens = itensPedido.stream()
+                .map(item -> item.getProduto().getNome())
+                .collect(Collectors.joining(", "));
 
-        modeloPedidos.addRow(new Object[]{pedido.getId(), descricaoItens, pedido.getTotal()});
+        // Exibe as quantidades dos itens do pedido
+        String quantidades = itensPedido.stream()
+                .map(item -> String.valueOf(item.getQuantidade()))
+                .collect(Collectors.joining(", "));
+
+        modeloPedidos.addRow(new Object[]{pedido.getId(), descricaoItens, quantidades, pedido.getTotal()});
         JOptionPane.showMessageDialog(this, "Pedido #" + pedido.getId() + " registrado! Total: R$ " + pedido.getTotal());
     }
+
+
+    // Função para atualizar o estoque de um produto após a venda
+    private void atualizarEstoque(Produto produto, int quantidadeVendida) {
+        for (Produto p : listaProdutos) {
+            if (p.getId() == produto.getId()) {
+                p.setQuantidade(p.getQuantidade() - quantidadeVendida);  // Atualiza a quantidade no estoque
+                break;
+            }
+        }
+
+        // Atualizar a tabela de produtos (modelo)
+        atualizarTabelaProdutos();
+    }
+
+    // Função para atualizar a tabela de produtos na interface
+    private void atualizarTabelaProdutos() {
+        // Limpa todas as linhas da tabela
+        modeloProdutos.setRowCount(0);
+
+        // Adiciona as linhas com os produtos atualizados
+        for (Produto produto : listaProdutos) {
+            modeloProdutos.addRow(new Object[]{
+                    produto.getId(),
+                    produto.getNome(),
+                    produto.getPreco(),
+                    produto.getQuantidade()
+            });
+        }
+
+        // Notifica que a tabela foi atualizada
+        modeloProdutos.fireTableDataChanged();
+    }
+
+
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(App::new);
