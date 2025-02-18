@@ -20,7 +20,6 @@ public class App extends JFrame {
 
     public App() {
         super("Gerenciador de Estoque"); // Define o título da janela
-        setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -229,6 +228,8 @@ public class App extends JFrame {
 
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(App::new);
+        App app = new App();  // Criação e inicialização da classe principal da aplicação
+        app.setSize(800, 500);
+        app.setVisible(true);  // Torna a interface visível
     }
 }
