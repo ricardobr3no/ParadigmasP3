@@ -1,3 +1,5 @@
+package classes;
+
 public class Medicamento extends Produto {
 
     enum Tarja {
@@ -38,10 +40,8 @@ public class Medicamento extends Produto {
         this.generico = generico;
     }
 
-    void mostrarInfo() {
-        System.out.println("Codigo: " + this.getCodigo());
-        System.out.println("Nome: " + this.getNome());
-        System.out.println("Valor: " + this.getValor());
+    public void mostrarInfo() {
+        super.mostrarInfo();
         System.out.println("Tarja: " + tarja);
         System.out.println("Laboratorio: " + laboratorio);
         System.out.println("Generico: " + generico);

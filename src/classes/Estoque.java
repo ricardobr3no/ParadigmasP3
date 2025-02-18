@@ -1,6 +1,7 @@
+package classes;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 class Estoque {
     private Map<String, Produto> produtos = new HashMap<String, Produto>();
@@ -12,7 +13,7 @@ class Estoque {
     public void cadastrarProduto(Produto produto) {
         if (!produtos.containsKey(produto.getCodigo())) {
             produtos.put(produto.getCodigo(), produto);
-            System.out.println("Produto cadastrado com sucesso!");
+            System.out.println("Classes.Produto cadastrado com sucesso!");
         } else {
             System.out.println("Erro: Já existe um produto com esse código.");
         }
@@ -23,17 +24,17 @@ class Estoque {
             Produto produto = produtos.get(codigo);
             produto.setNome(novoNome);
             produto.setValor(novoValor);
-            System.out.println("Produto atualizado com sucesso!");
+            System.out.println("Classes.Produto atualizado com sucesso!");
         } else {
-            System.out.println("Erro: Produto não encontrado.");
+            System.out.println("Erro: Classes.Produto não encontrado.");
         }
     }
 
     public void removerProduto(String codigo) {
         if (produtos.remove(codigo) != null) {
-            System.out.println("Produto removido com sucesso!");
+            System.out.println("Classes.Produto removido com sucesso!");
         } else {
-            System.out.println("Erro: Produto não encontrado.");
+            System.out.println("Erro: Classes.Produto não encontrado.");
         }
     }
 
@@ -62,12 +63,12 @@ class Estoque {
         System.out.print("valor do produto: ");
         double valorProduto = input.nextDouble();
 
-        Produto produto1 = new Produto();
+        Classes.Produto produto1 = new Classes.Produto();
         produto1.setNome(nomeProduto);
         produto1.setCodigo(codigoProduto);
         produto1.setValor(valorProduto);
 
-        Estoque estoque = new Estoque();
+        Classes.Estoque estoque = new Classes.Estoque();
         estoque.cadastrarProduto(produto1);
         estoque.listarProdutos();
          */

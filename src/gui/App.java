@@ -1,12 +1,11 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 
 public class App extends JDialog {
     private JPanel Root;
-    private JButton buttonOK;
-    private JButton buttonCancel;
     private JLabel Titulo;
     private JTabbedPane abas;
     private JPanel estoque;
@@ -35,23 +34,22 @@ public class App extends JDialog {
     private JLabel lblNome;
     private JLabel lblPreco;
     private JLabel lblQuantidade;
+    private JLabel Produto;
+    private JComboBox comboBox1;
+    private JSpinner spinner1;
+    private JPanel inputs;
+    private JLabel labelQuantidade1;
+    private JLabel lblDesconto;
+    private JSpinner spinner2;
+    private JPanel registros2;
+    private JLabel lblProduto;
+    private JLabel lblQtd;
+    private JLabel lblValor;
+    private JTable tabelaPedido;
 
     public App() {
         setContentPane(Root);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
-
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -79,8 +77,22 @@ public class App extends JDialog {
         dispose();
     }
 
+    private void loadTable() {
+        String[][] data = {
+                {"joao", "23", "slz"},
+                {"joao", "23", "slz"},
+                {"joao", "23", "slz"},
+        };
+        String[] row = {"joao", "23", "slz"};
+        String[] collumNames = {"nome", "age", "uf"};
+
+        DefaultTableModel modelo = new DefaultTableModel(data, collumNames);
+        tabelaPedido.setModel(modelo);
+    }
+
     public static void main(String[] args) {
         App dialog = new App();
+        dialog.loadTable();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
