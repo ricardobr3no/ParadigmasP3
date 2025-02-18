@@ -10,8 +10,9 @@ public class Medicamento extends Produto {
     private String laboratorio;
     private boolean generico = true;
 
-    Medicamento() {
-        super();
+    Medicamento(int codigo, String item, int quantidade, double valor, String laboratorio) {
+        super(codigo, item, quantidade, valor);
+        this.laboratorio = laboratorio;
     }
 
     public void setTarja(Tarja tarja) {
@@ -40,7 +41,7 @@ public class Medicamento extends Produto {
 
     void mostrarInfo() {
         System.out.println("Codigo: " + this.getCodigo());
-        System.out.println("Nome: " + this.getNome());
+        System.out.println("Nome: " + this.getItem());
         System.out.println("Valor: " + this.getValor());
         System.out.println("Tarja: " + tarja);
         System.out.println("Laboratorio: " + laboratorio);
